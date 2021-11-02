@@ -2,24 +2,23 @@
 
 #include <dir_analyze.hpp>
 
-Analyzer::Analyzer(const std::string& path){
+Analyzer::Analyzer(const std::string& path) {
   if (!path.empty()) {
     boost::system::error_code err;
-    if (fs::exists(path,err)) {
+    if (fs::exists(path, err)) {
       file_path = path;
-    }
-    else throw fs::filesystem_error("Nothing exist at the path", err);
+    } else
+      throw fs::filesystem_error("Nothing exist at the path", err);
   } else {
     file_path = fs::current_path();
   }
   const std::regex pattern(
       "^(balance_)\\d\\d\\d\\d\\d\\d\\d\\d_\\d\\d\\d\\d\\d\\d\\d\\d");
-  for (const auto& dir : fs::directory_iterator(file_path))
-  {
-    if (fs::is_directory(dir.path())){
+  for (const auto& dir : fs::directory_iterator(file_path)) {
+    if (fs::is_directory(dir.path())) {
       for (const auto& file : fs::directory_iterator{dir.path()}) {
-        if (fs::is_regular_file(file) && (file.path().extension() == ".txt")
-            && (std::regex_search(file.path().stem().string(), pattern))) {
+        if (fs::is_regular_file(file) && (file.path().extension() == ".txt") &&
+            (std::regex_search(file.path().stem().string(), pattern))) {
           pathArr.push_back(file.path());
           nameAccounts.insert(file.path().stem().string().substr(8, 8));
         }

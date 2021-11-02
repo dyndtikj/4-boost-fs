@@ -1,5 +1,5 @@
 #include <example.hpp>
 
-int main() {
+int main(int argc, char** argv) {
   example();
 }

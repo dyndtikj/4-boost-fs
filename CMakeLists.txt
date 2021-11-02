@@ -25,6 +25,9 @@ string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
 string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
 string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 
+hunter_add_package(Boost COMPONENTS system filesystem)
+find_package(Boost CONFIG REQUIRED system filesystem)
+
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
@@ -41,9 +44,11 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   "$<INSTALL_INTERFACE:include>"
 )
 
+target_link_libraries(${PROJECT_NAME} PUBLIC Boost::system Boost::filesystem)
 target_link_libraries(demo ${PROJECT_NAME})
 
 if(BUILD_TESTS)
+  file(COPY misc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
   add_executable(tests
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/example.cpp
   )

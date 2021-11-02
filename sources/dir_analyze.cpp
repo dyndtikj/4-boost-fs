@@ -7,8 +7,9 @@ Analyzer::Analyzer(const std::string& path) {
     boost::system::error_code err;
     if (fs::exists(path, err)) {
       file_path = path;
-    } else
+    } else {
       throw fs::filesystem_error("Nothing exist at the path", err);
+    }
   } else {
     file_path = fs::current_path();
   }

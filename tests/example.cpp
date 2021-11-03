@@ -11,8 +11,7 @@ TEST(Example, EmptyTest) {
 
 TEST(Analyze_dir, For_misc){
   std::ostringstream output;
-  Analyzer A("../misc/ftp");
-  A.Accounts_Stats(std::cout);
+  Analyzer A("misc/ftp");
   A.Accounts_Stats(output);
   EXPECT_EQ(
       output.str(),

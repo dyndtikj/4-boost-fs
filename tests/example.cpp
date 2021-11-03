@@ -11,7 +11,7 @@ TEST(Example, EmptyTest) {
 
 TEST(Analyze_dir, For_misc){
   std::ostringstream output;
-  Analyzer A("/home/travis/build/dyntikj/4-boost-fs/misc/ftf");
+  Analyzer A("/home/travis/build/dyntikj/4-boost-fs//misc/ftf");
   //Analyzer A("../misc/ftp");
   A.Accounts_Stats(output);
   EXPECT_EQ(

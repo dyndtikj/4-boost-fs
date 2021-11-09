@@ -20,8 +20,10 @@ class Analyzer{
   ~Analyzer();
 
   void Files_Info(std::ostream& out = std::cout) const;
-  std::stringstream Account_to_str(const fs::path& elem, const size_t& n) const;
   void Accounts_Stats(std::ostream& out = std::cout) const;
+
+ private:
+  std::stringstream Account_to_str(const fs::path& elem, const size_t& n) const;
  private:
   fs::path file_path;
   std::set<std::string> nameAccounts;

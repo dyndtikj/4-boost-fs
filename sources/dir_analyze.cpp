@@ -19,7 +19,7 @@ Analyzer::Analyzer(const std::string& path) {
     if (fs::is_directory(dir.path())) {
       for (const auto& file : fs::directory_iterator{dir.path()}) {
         if (fs::is_regular_file(file) && (file.path().extension() == ".txt") &&
-            (std::regex_search(file.path().stem().string(), pattern))) {
+            (std::regex_match(file.path().stem().string(), pattern))) {
           pathArr.push_back(file.path());
           nameAccounts.insert(file.path().stem().string().substr(8, 8));
         }
